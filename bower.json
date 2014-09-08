@@ -1,0 +1,26 @@
+{
+  "name": "angular-check-all",
+  "version": "0.0.0",
+  "description": "AngularJS directive to control a group of checkboxes",
+  "authors": [
+    "Roch Devost"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "example",
+    "package.json",
+    "karma.conf.js"
+  ],
+  "dependencies": {
+    "angular": "~1.2"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2",
+    "checklist-model": "~0.1.3"
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <link rel="stylesheet" href="example.css">
+  </head>
+
+  <body ng-controller="ExampleCtrl">
+    <h5>Object</h5>
+
+    <label>
+      <input type="checkbox" check-all="all.letters"> all
+    </label>
+
+    <label ng-repeat="(key, value) in all.letters">
+      <input type="checkbox" ng-model="all.letters[key]"> {{key}}
+    </label>
+
+    <h5>Array by value</h5>
+
+    <label>
+      <input type="checkbox" check-all="all.numbers" by-value="checked"> all
+    </label>
+
+    <label ng-repeat="number in all.numbers">
+      <input type="checkbox" ng-model="number.checked"> {{number.value}}
+    </label>
+
+    <h5>External list</h5>
+
+    <label>
+      <input type="checkbox" check-all="all.cars" to-list="selected.cars"> all
+    </label>
+
+    <label ng-repeat="car in all.cars">
+      <input type="checkbox" checklist-model="selected.cars" checklist-value="car"> {{car}}
+    </label>
+
+    <h5>External list by value</h5>
+
+    <label>
+      <input type="checkbox" check-all="all.fruits" to-list="selected.fruits" by-value="name"> all
+    </label>
+
+    <label ng-repeat="fruit in all.fruits">
+      <input type="checkbox" checklist-model="selected.fruits" checklist-value="fruit.name"> {{fruit.name}}
+    </label>
+
+    <h5>External list by key</h5>
+
+    <label>
+      <input type="checkbox" check-all="all.romanNumerals" to-list="selected.romanNumerals" by-key> all
+    </label>
+
+    <label ng-repeat="(key, value) in all.romanNumerals">
+      <input type="checkbox" checklist-model="selected.romanNumerals" checklist-value="key"> {{key}}
+    </label>
+
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/checklist-model/checklist-model.js"></script>
+    <script src="../angular-check-all.js"></script>
+    <script src="example.js"></script>
+  </body>
+</html>

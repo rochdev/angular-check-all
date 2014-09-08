@@ -1,0 +1,22 @@
+{
+  "name": "angular-check-all",
+  "version": "0.0.0",
+  "description": "AngularJS directive to control a group of checkboxes",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint angular-check-all.js && ./node_modules/karma/bin/karma start --single-run",
+    "build": "./node_modules/uglify-js/bin/uglifyjs angular-check-all.js -c --comments -m --source-map angular-check-all.min.js.map -o angular-check-all.min.js"
+  },
+  "author": "Roch Devost",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "jshint": "^2.5.5",
+    "karma": "^0.12.23",
+    "karma-jasmine": "^0.1.5",
+    "karma-junit-reporter": "^0.2.2",
+    "karma-mocha-reporter": "^0.3.1",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "uglify-js": "^2.4.15"
+  }
+}
