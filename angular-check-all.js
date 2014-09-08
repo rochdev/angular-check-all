@@ -25,19 +25,29 @@ angular.module('checkAll', [])
           scope.$watch(iAttrs.toList, sync, true);
           scope.$watch(iAttrs.checkAll, function(newCollection, oldCollection) {
             if (oldCollection) {
-              var list = toList(scope) || [];
+              var list = toList(scope);
 
-              angular.forEach(oldCollection, function(value, key) {
+              if (list) {
                 if (iAttrs.byKey !== undefined) {
-                  if (newCollection[key] === undefined) {
-                    safeRemove(list, key);
-                  }
+                  angular.forEach(oldCollection, function(value, key) {
+                    if (newCollection[key] === undefined) {
+                      safeRemove(list, key);
+                    }
+                  });
                 } else {
-                  if (newCollection.indexOf(getValue(value)) === -1) {
-                    safeRemove(list, getValue(value));
-                  }
+                  var temp = [];
+
+                  angular.forEach(newCollection, function(value, key) {
+                    temp.push(getValue(value));
+                  });
+
+                  angular.forEach(oldCollection, function(value, key) {
+                    if (temp.indexOf(getValue(value)) === -1) {
+                      safeRemove(list, getValue(value));
+                    }
+                  });
                 }
-              });
+              }
             }
           }, true);
         }
