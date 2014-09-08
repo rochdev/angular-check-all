@@ -25,7 +25,6 @@ angular.module('checkAll', [])
           scope.$watch(iAttrs.toList, sync, true);
           scope.$watch(iAttrs.checkAll, function(newCollection, oldCollection) {
             if (oldCollection) {
-              var temp = [];
               var list = toList(scope) || [];
 
               angular.forEach(oldCollection, function(value, key) {
@@ -115,10 +114,6 @@ angular.module('checkAll', [])
         function getValue(value) {
           return iAttrs.byValue !== undefined ? byValue(value) : value;
         };
-
-        function getCount(collection) {
-          return iAttrs.byKey !== undefined ? getKeys(collection).length : collection.length;
-        }
       }
     };
 
@@ -154,17 +149,5 @@ angular.module('checkAll', [])
       if (index !== -1) {
         collection.splice(index, 1);
       }
-    }
-
-    function getKeys(obj) {
-      var keys = [];
-
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          keys.push(key);
-        }
-      }
-
-      return keys;
     }
   }]);
