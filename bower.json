@@ -5,6 +5,18 @@
   "authors": [
     "Roch Devost"
   ],
+  "keywords": [
+    "angular",
+    "angularjs",
+    "angular.js",
+    "check",
+    "checkbox",
+    "check-all",
+    "checklist",
+    "checklist-model"
+    "select",
+    "select-all"
+  ],
   "license": "MIT",
   "private": true,
   "main": "angular-check-all.js",

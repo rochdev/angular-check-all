@@ -8,6 +8,18 @@
     "build": "./node_modules/uglify-js/bin/uglifyjs angular-check-all.js -c --comments -m --source-map angular-check-all.min.js.map -o angular-check-all.min.js"
   },
   "author": "Roch Devost",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "angular.js",
+    "check",
+    "checkbox",
+    "check-all",
+    "checklist",
+    "checklist-model"
+    "select",
+    "select-all"
+  ],
   "license": "MIT",
   "private": true,
   "devDependencies": {
