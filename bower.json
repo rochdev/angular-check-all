@@ -7,6 +7,7 @@
   ],
   "license": "MIT",
   "private": true,
+  "main": "angular-check-all.js",
   "ignore": [
     "**/.*",
     "node_modules",
