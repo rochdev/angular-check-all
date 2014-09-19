@@ -50,7 +50,7 @@ describe('checkAll', function() {
         $scope.$digest();
       });
 
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.source[0]).toBe(true);
@@ -59,7 +59,7 @@ describe('checkAll', function() {
         expect($scope.source[1].b[1]).toBe(true);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.source[0] = true;
         $scope.source[1].a = true;
         $scope.source[1].b[0] = true;
@@ -71,7 +71,7 @@ describe('checkAll', function() {
         expect($scope.source[1].b[1]).toBe(true);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.source[0] = true;
         $scope.source[1].a = true;
         $scope.source[1].b[0] = $scope.source[1].b[1] = true;
@@ -110,14 +110,14 @@ describe('checkAll', function() {
     });
 
     function test(a, b) {
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.source[a]).toBe(true);
         expect($scope.source[b]).toBe(true);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.source[a] = true;
         $element.triggerHandler('click');
 
@@ -125,7 +125,7 @@ describe('checkAll', function() {
         expect($scope.source[b]).toBe(true);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.source[a] = $scope.source[b] = true;
         $element.triggerHandler('click');
 
@@ -192,14 +192,14 @@ describe('checkAll', function() {
     });
 
     function test(a, b) {
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.source[a].test).toBe(true);
         expect($scope.source[b].test).toBe(true);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.source[a].test = true;
         $element.triggerHandler('click');
 
@@ -207,7 +207,7 @@ describe('checkAll', function() {
         expect($scope.source[b].test).toBe(true);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.source[a].test = $scope.source[b].test = true;
         $element.triggerHandler('click');
 
@@ -272,7 +272,7 @@ describe('checkAll', function() {
         $scope.$digest();
       });
 
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.source[0].value).toBe(true);
@@ -283,7 +283,7 @@ describe('checkAll', function() {
         expect($scope.source[1].children.b.children[1].value).toBe(true);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.source[1].children.b.children[1].value = true;
 
         $element.triggerHandler('click');
@@ -296,7 +296,7 @@ describe('checkAll', function() {
         expect($scope.source[1].children.b.children[1].value).toBe(true);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.source[0].value = true;
         $scope.source[1].value = true;
         $scope.source[1].children.a.value = true;
@@ -376,14 +376,14 @@ describe('checkAll', function() {
     });
 
     function test(a, b) {
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.list).toContain($scope.source[a]);
         expect($scope.list).toContain($scope.source[b]);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.list.push($scope.source[a]);
         $element.triggerHandler('click');
 
@@ -391,7 +391,7 @@ describe('checkAll', function() {
         expect($scope.list).toContain($scope.source[b]);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.list.push($scope.source[a], $scope.source[b]);
         $element.triggerHandler('click');
 
@@ -420,6 +420,13 @@ describe('checkAll', function() {
       it('should get unchecked when all are unchecked', function() {
         expect($element.prop('checked')).toBe(false);
         expect($element.prop('indeterminate')).toBe(false);
+      });
+
+      it('should not remove unrelated entries when clicked and all are checked', function() {
+        $scope.list.push($scope.source[a], $scope.source[b], null);
+        $element.triggerHandler('click');
+
+        expect($scope.list).toContain(null);
       });
     }
   });
@@ -462,14 +469,14 @@ describe('checkAll', function() {
     });
 
     function test(a, b) {
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.list).toContain($scope.source[a].test);
         expect($scope.list).toContain($scope.source[b].test);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.list.push($scope.source[a].test);
         $element.triggerHandler('click');
 
@@ -477,7 +484,7 @@ describe('checkAll', function() {
         expect($scope.list).toContain($scope.source[b].test);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.list.push($scope.source[a].test, $scope.source[b].test);
         $element.triggerHandler('click');
 
@@ -506,6 +513,13 @@ describe('checkAll', function() {
       it('should get unchecked when all are unchecked', function() {
         expect($element.prop('checked')).toBe(false);
         expect($element.prop('indeterminate')).toBe(false);
+      });
+
+      it('should not remove unrelated entries when clicked and all are checked', function() {
+        $scope.list.push($scope.source[a].test, $scope.source[b].test, 2);
+        $element.triggerHandler('click');
+
+        expect($scope.list).toContain(2);
       });
     }
   });
@@ -545,7 +559,7 @@ describe('checkAll', function() {
         $scope.$digest();
       });
 
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.list).toContain(0);
@@ -555,7 +569,7 @@ describe('checkAll', function() {
         expect($scope.list).toContain(4);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.list.push(0, 1, 2, 3);
         $element.triggerHandler('click');
 
@@ -566,7 +580,7 @@ describe('checkAll', function() {
         expect($scope.list).toContain(4);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.list.push(0, 1, 2, 3, 4);
         $element.triggerHandler('click');
 
@@ -598,6 +612,13 @@ describe('checkAll', function() {
       it('should get unchecked when all are unchecked', function() {
         expect($element.prop('checked')).toBe(false);
         expect($element.prop('indeterminate')).toBe(false);
+      });
+
+      it('should not remove unrelated entries when clicked and all are checked', function() {
+        $scope.list.push(0, 1, 2, 3, 4, 5);
+        $element.triggerHandler('click');
+
+        expect($scope.list).toContain(5);
       });
     });
   });
@@ -634,14 +655,14 @@ describe('checkAll', function() {
     });
 
     function test(a, b) {
-      it('should check all when none is checked', function() {
+      it('should check all when clicked and none is checked', function() {
         $element.triggerHandler('click');
 
         expect($scope.list).toContain(a);
         expect($scope.list).toContain(b);
       });
 
-      it('should check all when some are checked', function() {
+      it('should check all when clicked and some are checked', function() {
         $scope.list.push(a);
         $element.triggerHandler('click');
 
@@ -649,7 +670,7 @@ describe('checkAll', function() {
         expect($scope.list).toContain(b);
       });
 
-      it('should uncheck all when all are checked', function() {
+      it('should uncheck all when clicked and all are checked', function() {
         $scope.list.push(a, b);
         $element.triggerHandler('click');
 
@@ -678,6 +699,13 @@ describe('checkAll', function() {
       it('should get unchecked when all are unchecked', function() {
         expect($element.prop('checked')).toBe(false);
         expect($element.prop('indeterminate')).toBe(false);
+      });
+
+      it('should not remove unrelated entries when clicked and all are checked', function() {
+        $scope.list.push(a, b, null);
+        $element.triggerHandler('click');
+
+        expect($scope.list).toContain(null);
       });
     }
   });

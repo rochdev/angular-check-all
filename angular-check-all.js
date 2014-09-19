@@ -66,7 +66,15 @@ angular.module('checkAll', [])
               }
 
               if (!check) {
-                list.splice(0, list.length);
+                if (iAttrs.byKey !== undefined && iAttrs.byValue === undefined) {
+                  angular.forEach(collection, function(value, key) {
+                    safeRemove(list, key);
+                  });
+                } else {
+                  angular.forEach(getValues(collection), function(value) {
+                    safeRemove(list, value);
+                  });
+                }
               } else {
                 angular.forEach(collection, function(value, key) {
                   if (iAttrs.byKey !== undefined && iAttrs.byValue === undefined) {

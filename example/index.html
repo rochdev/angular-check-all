@@ -64,7 +64,7 @@
     </label>
 
     <label ng-repeat="section in all.sections">
-      <input type="checkbox" checklist-model="selected.sections" checklist-value="section.value"> {{section.value}}
+      <input type="checkbox" check-all="section.children" to-list="selected.sections" by-value="value" nested-by="children"> {{section.value}}
 
       <label ng-repeat="subSection in section.children">
         <input type="checkbox" checklist-model="selected.sections" checklist-value="subSection.value"> {{subSection.value}}
