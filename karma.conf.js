@@ -5,11 +5,15 @@ module.exports = function(config) {
     files: [
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
-      'check-all.js',
+      'angular-check-all.js',
       'test/**/*.spec.js'
     ],
 
     reporters: ['mocha', 'junit'],
+
+    mochaReporter: {
+      output: 'autowatch'
+    },
 
     autoWatch: true,
 

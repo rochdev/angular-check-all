@@ -1,4 +1,4 @@
-# angular-check-all [![License][license-image]][license-url]
+# angular-check-all [![Build][build-image]][build-url] [![License][license-image]][license-url]
 
 [AngularJS][angular-url] directive to control a group of checkboxes. Fully compatible with [checklist-model][checklist-url].
 
@@ -13,7 +13,7 @@ $ bower install https://github.com/rochdev/angular-check-all.git
 ## Usage
 
 ```html
-<input type="checkbox" check-all="" to-list="" by-value="" by-key>
+<input type="checkbox" check-all="" to-list="" by-value="" by-key nested-by="">
 ```
 
 Available options:
@@ -24,6 +24,7 @@ Available options:
 | to-list *(optional)* | `expression` | List containing the checked keys/values instead of using boolean values directly on the source.
 | by-value *(optional)* | `expression` | Path expression to find the values to copy to the list when looping through the source.
 | by-key *(optional)* | `void` | If present, tells the directive to copy keys to the list instead of values.
+| nested-by *(optional)* | `expression` | Path expression to find children for recursion. Works with the `by-value` option.
 
 ## Example
 

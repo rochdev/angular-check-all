@@ -23,31 +23,35 @@ angular.module('app', ['checklist-model', 'checkAll'])
         iii: 3
       },
       sections: [
-      {
-        value: 1,
-        children: [
-          { value: 1.1 },
-          { value: 1.2 },
-          { value: 1.3 }
-        ]
-      },
-      {
-        value: 2,
-        children: [
-          { value: 2.1 },
-          { value: 2.2 },
-          { value: 2.3 }
-        ]
-      },
-      {
-        value: 3,
-        children: [
-          { value: 3.1 },
-          { value: 3.2 },
-          { value: 3.3 }
-        ]
+        {
+          value: 1,
+          children: [
+            { value: 1.1 },
+            { value: 1.2 },
+            { value: 1.3 }
+          ]
+        },
+        {
+          value: 2,
+          children: [
+            { value: 2.1 },
+            { value: 2.2 },
+            { value: 2.3 }
+          ]
+        },
+        {
+          value: 3,
+          children: [
+            { value: 3.1 },
+            { value: 3.2 },
+            { value: 3.3 }
+          ]
+        }
+      ],
+      sectionns: {
+        first: true,
+        second: true
       }
-    ]
     };
 
     $scope.selected = {

@@ -23,7 +23,7 @@
       <input type="checkbox" check-all="all.numbers" by-value="checked"> all
     </label>
 
-    <label ng-repeat="number in all.numbers">
+    <label ng-repeat="number in all.numbers track by $index">
       <input type="checkbox" ng-model="number.checked"> {{number.value}}
     </label>
 
@@ -55,6 +55,20 @@
 
     <label ng-repeat="(key, value) in all.romanNumerals">
       <input type="checkbox" checklist-model="selected.romanNumerals" checklist-value="key"> {{key}}
+    </label>
+
+    <h5>External list by value repeat</h5>
+
+    <label>
+      <input type="checkbox" check-all="all.sections" to-list="selected.sections" by-value="value" nested-by="children"> all
+    </label>
+
+    <label ng-repeat="section in all.sections">
+      <input type="checkbox" checklist-model="selected.sections" checklist-value="section.value"> {{section.value}}
+
+      <label ng-repeat="subSection in section.children">
+        <input type="checkbox" checklist-model="selected.sections" checklist-value="subSection.value"> {{subSection.value}}
+      </label>
     </label>
 
     <script src="../bower_components/angular/angular.js"></script>

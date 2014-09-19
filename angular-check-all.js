@@ -7,17 +7,22 @@ angular.module('checkAll', [])
    * @param {expression} toList
    * @param {expression} byValue
    * @param byKey
+   * @param {expression} nestedBy
    * 
    * @description
    * The `checkAll` directive controls multiple checkboxes.
    */
   .directive('checkAll', ['$parse', function($parse) {
+    'use strict';
+
     return {
       restrict: 'A',
+      scope: true,
       link: function(scope, iElement, iAttrs) {
         var checkAll = $parse(iAttrs.checkAll);
         var byValue = $parse(iAttrs.byValue);
         var toList = $parse(iAttrs.toList);
+        var nestedBy = $parse(iAttrs.nestedBy);
 
         scope.$watch(iAttrs.checkAll, sync, true);
 
@@ -35,15 +40,11 @@ angular.module('checkAll', [])
                     }
                   });
                 } else {
-                  var temp = [];
+                  var temp = getValues(newCollection);
 
-                  angular.forEach(newCollection, function(value, key) {
-                    temp.push(getValue(value));
-                  });
-
-                  angular.forEach(oldCollection, function(value, key) {
-                    if (temp.indexOf(getValue(value)) === -1) {
-                      safeRemove(list, getValue(value));
+                  angular.forEach(getValues(oldCollection), function(value) {
+                    if (temp.indexOf(value) === -1) {
+                      safeRemove(list, value);
                     }
                   });
                 }
@@ -55,33 +56,32 @@ angular.module('checkAll', [])
         iElement.on('click', function() {
           scope.$apply(function() {
             var collection = checkAll(scope) || [];
-            var all;
-
+            var check = !every(collection, everyChecked);
+            
             if (iAttrs.toList) {
               var list = toList(scope);
 
-              list || toList.assign(scope, []);
-              all = !someUnchecked(collection);
+              if (!list) {
+                list = toList.assign(scope.$parent, []);
+              }
 
-              if (all) {
+              if (!check) {
                 list.splice(0, list.length);
               } else {
                 angular.forEach(collection, function(value, key) {
-                  if (iAttrs.byKey !== undefined) {
+                  if (iAttrs.byKey !== undefined && iAttrs.byValue === undefined) {
                     safeAdd(list, key);
                   } else {
-                    safeAdd(list, getValue(value));
+                    safeAddValues(list, value);
                   }
                 });
               }
             } else {
-              all = !someUnchecked(collection);
-
               angular.forEach(collection, function(value, key) {
                 if (iAttrs.byValue !== undefined) {
-                  byValue.assign(value, !all);
+                  assignAll(value, check);
                 } else {
-                  collection[key] = !all;
+                  toggleAll(collection, key, check);
                 }
               });
             }
@@ -90,24 +90,71 @@ angular.module('checkAll', [])
 
         function sync() {
           var collection = checkAll(scope) || [];
-          var someTrue = someChecked(collection);
-          var someFalse = someUnchecked(collection);
+          var checked = every(collection, everyChecked);
 
-          iElement.prop('indeterminate', someTrue && someFalse);
-          iElement.prop('checked', !someFalse);
+          iElement.prop('indeterminate', !checked && some(collection, someChecked));
+          iElement.prop('checked', checked);
         }
 
-        function someChecked(collection) {
-          return some(collection, somePredicate);
+        function assignAll(item, value) {
+          if (iAttrs.nestedBy) {
+            angular.forEach(nestedBy(item), function(subItem) {
+              assignAll(subItem, value);
+            });
+          }
+
+          byValue.assign(item, value);
         }
 
-        function someUnchecked(collection) {
-          return some(collection, function(value, key) {
-            return !somePredicate(value, key);
-          });
+        function safeAddValues(list, value) {
+          safeAdd(list, getValue(value));
+
+          if (iAttrs.nestedBy) {
+            angular.forEach(nestedBy(value), function(leaf) {
+              safeAddValues(list, leaf);
+            });
+          }
         }
 
-        function somePredicate(value, key) {
+        function toggleAll(collection, key, value) {
+          if (angular.isArray(collection[key]) || angular.isObject(collection[key])) {
+            angular.forEach(collection[key], function(item, itemKey) {
+              toggleAll(collection[key], itemKey, value);
+            });
+          } else {
+            collection[key] = value;
+          }
+        }
+
+        function someChecked(value, key) {
+          if (iAttrs.byValue !== undefined) {
+            if (nestedBy(value)) {
+              return isChecked(value, key) || some(nestedBy(value), someChecked);
+            }
+          } else if (!iAttrs.toList) {
+            if (angular.isArray(value) || angular.isObject(value)) {
+              return some(value, someChecked);
+            }
+          }
+
+          return isChecked(value, key);
+        }
+
+        function everyChecked(value, key) {
+          if (iAttrs.byValue !== undefined) {
+            if (nestedBy(value)) {
+              return isChecked(value, key) && every(nestedBy(value), everyChecked);
+            }
+          } else if (!iAttrs.toList) {
+            if (angular.isArray(value) || angular.isObject(value)) {
+              return every(value, everyChecked);
+            }
+          }
+
+          return isChecked(value, key);
+        }
+
+        function isChecked(value, key) {
           if (iAttrs.toList) {
             var list = toList(scope) || [];
 
@@ -117,35 +164,55 @@ angular.module('checkAll', [])
               return list.indexOf(getValue(value)) !== -1;
             }
           } else {
-            return getValue(value);
+            return getValue(value) === true;
           }
+        }
+
+        function some(collection, predicate) {
+          if (angular.isArray(collection)) {
+            for (var i = 0; i < collection.length; i++) {
+              if (predicate(collection[i], i, collection)) {
+                return true;
+              }
+            }
+          } else if (angular.isObject(collection)) {
+            for (var key in collection) {
+              if (collection.hasOwnProperty(key)) {
+                if (predicate(collection[key], key, collection)) {
+                  return true;
+                }
+              }
+            }
+          }
+
+          return false;
+        }
+
+        function every(collection, predicate) {
+          return !some(collection, function(value, key) {
+            return !predicate(value, key);
+          });
         }
 
         function getValue(value) {
           return iAttrs.byValue !== undefined ? byValue(value) : value;
-        };
+        }
+
+        function getValues(collection) {
+          var values = [];
+
+          angular.forEach(collection, function(value) {
+            values.push(getValue(value));
+
+            if (nestedBy(value)) {
+              Array.prototype.push.apply(values, getValues(nestedBy(value)));
+            }
+          });
+
+          return values;
+        }
       }
     };
-
-    function some(collection, predicate) {
-      if (angular.isArray(collection)) {
-        for (var i = 0; i < collection.length; i++) {
-          if (predicate(collection[i], i)) {
-            return true;
-          }
-        }
-      } else {
-        for (var key in collection) {
-          if (collection.hasOwnProperty(key)) {
-            if (predicate(collection[key], key)) {
-              return true;
-            }
-          }
-        }
-      }
-
-      return false;
-    }
 
     function safeAdd(collection, value) {
       if (collection.indexOf(value) === -1) {
