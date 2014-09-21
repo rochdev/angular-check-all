@@ -1,4 +1,3 @@
-// TODO: write tests
 describe('checkAll', function() {
   var $compile;
   var $element;
