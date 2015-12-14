@@ -21,7 +21,6 @@
     "select-all"
   ],
   "license": "MIT",
-  "private": true,
   "devDependencies": {
     "jasmine-core": "^2.3.0",
     "jshint": "^2.5.5",
