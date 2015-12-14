@@ -7,7 +7,7 @@
 From your project root, run:
 
 ```sh
-$ bower install https://github.com/rochdev/angular-check-all.git
+$ bower install angular-check-all
 ```
 
 ## Usage
