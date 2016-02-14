@@ -28,7 +28,7 @@
     "karma-chrome-launcher": "^0.2.2",
     "karma-jasmine": "^0.3.7",
     "karma-junit-reporter": "^0.2.2",
-    "karma-mocha-reporter": "^1.0.2",
+    "karma-mocha-reporter": "^1.1.5",
     "karma-phantomjs-launcher": "^0.2.0",
     "phantomjs": "^1.9.17",
     "uglify-js": "^2.4.15"
