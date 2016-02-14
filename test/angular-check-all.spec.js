@@ -326,6 +326,7 @@ describe('checkAll', function() {
         expect($element.prop('checked')).toBe(true);
         expect($element.prop('indeterminate')).toBe(false);
       });
+      
 
       it('should get indeterminate when some are checked', function() {
         $scope.$apply(function() {
