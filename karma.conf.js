@@ -15,6 +15,10 @@ module.exports = function(config) {
       output: 'autowatch'
     },
 
+    junitReporter: {
+      outputDir: 'test/reports'
+    },
+
     autoWatch: true,
 
     browsers: ['PhantomJS']
