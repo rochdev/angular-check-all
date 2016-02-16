@@ -5,5 +5,8 @@ node_js:
   - '4.0'
 sudo: false
 before_script:
+  - npm install -g codeclimate-test-reporter
   - npm install -g bower
   - bower install
+after_script:
+  - codeclimate < coverage/**/lcov.info

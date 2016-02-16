@@ -1,6 +1,12 @@
-# angular-check-all [![Build][build-image]][build-url] [![License][license-image]][license-url]
+# angular-check-all
+[![Version](https://img.shields.io/bower/v/angular-check-all.svg)](https://github.com/rochdev/angular-check-all)
+[![Build Status](https://travis-ci.org/rochdev/angular-check-all.svg?branch=master)](https://travis-ci.org/rochdev/angular-check-all)
+[![Test Coverage](https://codeclimate.com/github/rochdev/angular-check-all/badges/coverage.svg)](https://codeclimate.com/github/rochdev/angular-check-all)
+[![Code Climate](https://codeclimate.com/github/rochdev/angular-check-all/badges/gpa.svg)](https://codeclimate.com/github/rochdev/angular-check-all)
+[![Dependency Status](https://gemnasium.com/rochdev/angular-check-all.svg)](https://gemnasium.com/rochdev/angular-check-all)
+[![License](http://img.shields.io/badge/license-MIT-red.svg)][license-url]
 
-[AngularJS][angular-url] directive to control a group of checkboxes. Fully compatible with [checklist-model][checklist-url].
+[AngularJS](https://angularjs.org) directive to control a group of checkboxes. Fully compatible with [checklist-model](http://vitalets.github.io/checklist-model/).
 
 ## How to install
 
@@ -34,11 +40,4 @@ See the [example](example) folder for a complete example.
 
 [MIT License][license-url]
 
-[angular-url]: https://angularjs.org
-[build-image]: http://img.shields.io/travis/rochdev/angular-check-all/master.svg?style=flat-square
-[build-url]: https://travis-ci.org/rochdev/angular-check-all
-[checklist-url]: http://vitalets.github.io/checklist-model/
-[license-image]: http://img.shields.io/badge/license-MIT-red.svg?style=flat-square
 [license-url]: http://en.wikipedia.org/wiki/MIT_License
-[version-image]: http://img.shields.io/badge/release-0.0.0-orange.svg?style=flat-square
-[version-url]: https://github.com/rochdev/angular-check-all

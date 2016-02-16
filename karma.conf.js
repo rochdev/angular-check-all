@@ -9,7 +9,11 @@ module.exports = function(config) {
       'test/**/*.spec.js'
     ],
 
-    reporters: ['mocha', 'junit'],
+    preprocessors: {
+      'angular-check-all.js': ['coverage']
+    },
+
+    reporters: ['mocha', 'junit', 'coverage'],
 
     mochaReporter: {
       output: 'autowatch'
@@ -17,6 +21,13 @@ module.exports = function(config) {
 
     junitReporter: {
       outputDir: 'test/reports'
+    },
+
+    coverageReporter: {
+      reporters: [
+        {type: 'lcov'},
+        {type: 'text-summary'}
+      ]
     },
 
     autoWatch: true,
