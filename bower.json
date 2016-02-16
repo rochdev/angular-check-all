@@ -1,6 +1,6 @@
 {
   "name": "angular-check-all",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "AngularJS directive to control a group of checkboxes",
   "authors": [
     "Roch Devost"
