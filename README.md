@@ -1,4 +1,6 @@
 # angular-check-all
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/rochdev/angular-check-all.svg)](https://greenkeeper.io/)
 [![Version](https://img.shields.io/bower/v/angular-check-all.svg)](https://github.com/rochdev/angular-check-all)
 [![Build Status](https://travis-ci.org/rochdev/angular-check-all.svg?branch=master)](https://travis-ci.org/rochdev/angular-check-all)
 [![Test Coverage](https://codeclimate.com/github/rochdev/angular-check-all/badges/coverage.svg)](https://codeclimate.com/github/rochdev/angular-check-all)
